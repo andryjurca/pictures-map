@@ -11,11 +11,13 @@ function changeMode(){
         document.getElementById('map').style.width = '100%';
         document.getElementById('picture').style.display = 'none';
         map.invalidateSize();
+        map.setZoom(map.getZoom()+1)
     }
     else{
         document.getElementById('map').style.width = '50%';
         document.getElementById('picture').style.display = 'flex';
         map.invalidateSize();
+        map.setZoom(map.getZoom()-1)
         // functie css cu care sa scalezi o imagine la dimensiunea divului
         
         
@@ -27,9 +29,13 @@ function changeMode(){
 
 // 3. create map
 
-var latlng = L.latLng(44.427, 26.1);
+var latlng = L.latLng(44.429, 26.105);
 
-var map = L.map('map').setView(latlng, 14)
+var map = L.map('map', {
+  center: latlng,
+  zoom: 15,
+  doubleClickZoom: false
+})
 
 // 4. add tilelayer
 

@@ -50,12 +50,14 @@ var myStyle = { // not working (uite-te mai mult la geojson styling)
 var readfromjson = L.geoJSON(geojsonphotos, {
         style:myStyle, // not working
         onEachFeature: function (feature, layer) {   
-        if (feature.properties && feature.properties.filename)
-            layer.bindPopup('<img src=' + JSON.stringify(feature.properties.filename) + 'width="auto" height="100" id="imageBox"></img>', {maxWidth: "auto"})  
+        if (feature.properties && feature.properties.filename) {
+            layer.bindPopup('<img src=' + JSON.stringify(feature.properties.filename) + 'width="auto" height="100" id="imageBox"></img>', {maxWidth: "auto"})
             layer.on('click', function(e) {
             console.log(e)
+            console.log(layer)
             document.getElementById("poza1").src=e.target.feature.properties.filename;
           })
+        }
     }
 }).addTo(map);
 

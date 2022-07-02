@@ -51,7 +51,7 @@ var readfromjson = L.geoJSON(geojsonphotos, {
         style:myStyle, // not working
         onEachFeature: function (feature, layer) {   
         if (feature.properties && feature.properties.filename) {
-            layer.bindPopup('<img src=' + JSON.stringify(feature.properties.filename) + 'width="auto" height="100" id="imageBox"></img>', {maxWidth: "auto"})
+            layer.bindPopup('<img src=' + JSON.stringify(feature.properties.filename) + 'width="100" height="auto" id="imageBox"></img>', {maxWidth: "auto"})
             layer.on('click', function(e) {
             console.log(e)
             console.log(layer)

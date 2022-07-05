@@ -43,7 +43,7 @@ var myStyle = { // not working (uite-te mai mult la geojson styling)
         "fillOpacity": 0.90
     };
 
-var readfromjson = L.geoJSON(geojsondata, {
+var readfromjson = L.geoJSON(realdata, {
         style:myStyle, // not working
         onEachFeature: function (feature, layer) {   
         if (feature.properties && feature.properties.filename) {

@@ -45,8 +45,16 @@ map.on('draw:created', function(e) {
     drawnItems.addLayer(layer);
 });
 
-document.getElementById('button').addEventListener('click', function() {
-    var data = JSON.stringify(drawnItems.toGeoJSON());
-    download("var realdata = " + data, "test.js", "text/javascript")
+//document.getElementById('button').addEventListener('click', function() {
+    //var data = JSON.stringify(drawnItems.toGeoJSON());
+    //download("var realdata = " + data, "test.js", "text/javascript")
     
-});
+//});
+
+$(document).ready(function(){
+    $('#button').click(function(){
+        realdata = JSON.stringify(drawnItems.toGeoJSON());
+        alert(realdata)
+    })
+})
+

@@ -38,6 +38,13 @@ var drawControl = new L.Control.Draw({
 
 map2.addControl(drawControl);
 
+dataa = localStorage.getItem('datas1')
+var geeoojson = L.geoJSON(JSON.parse(dataa), {
+    onEachFeature: function (feature, layer) {
+        layer.addTo(drawnItems);
+    }
+}).addTo(map2)
+
 map2.on('draw:created', function(e) {
     var layer = e.layer,
     feature = layer.feature = layer.feature || {};
@@ -46,12 +53,6 @@ map2.on('draw:created', function(e) {
     var props = feature.properties = feature.properties || {};
     drawnItems.addLayer(layer);
 });
-
-//document.getElementById('button').addEventListener('click', function() {
-    //var data = JSON.stringify(drawnItems.toGeoJSON());
-    //download("var realdata = " + data, "test.js", "text/javascript")
-    
-//});
 
 $(document).ready(function(){
     $('#button').click(function(){

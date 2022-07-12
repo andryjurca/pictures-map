@@ -1,3 +1,5 @@
+// 1. initialize datas object where geojson will be stored
+
 var realdata = {}
 
 const datas = {
@@ -19,7 +21,7 @@ else{
     datas.writedata(localStorage.getItem('datas1'))
 }
 
-// 1. functions
+// 2. function connected to M button to change the view mode
 
 var clicked_times = 0
 
@@ -39,7 +41,7 @@ function changeMode(){
     }   
 }
     
-// 2. create map
+// 3. create map
 
 var latlng = L.latLng(44.429, 26.105);
 
@@ -49,14 +51,14 @@ var map = L.map('map', {
   doubleClickZoom: false
 })
 
-// 3. add tilelayer
+// 4. add tilelayer
 
 L.tileLayer('https://tiles01.rent-a-planet.com/arhet2-carto/{z}/{x}/{y}.png?{foo}', {
         foo: 'bar', 
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
 
-// 4. reading from geojson
+// 5. displaying the geojson data (objects and properties) on the map from localstorage
 
 var myStyle = { // not working (uite-te mai mult la geojson styling)
         "color": "#ff7800",

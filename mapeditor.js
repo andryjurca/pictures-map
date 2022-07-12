@@ -1,4 +1,4 @@
-//var realdata = {"type":"FeatureCollection","features":[{"type":"Feature","properties":{},"geometry":{"type":"Point","coordinates":[26.036749,44.443203]}},{"type":"Feature","properties":{},"geometry":{"type":"Point","coordinates":[26.106981,44.405168]}},{"type":"Feature","properties":{},"geometry":{"type":"Point","coordinates":[26.140122,44.446269]}},{"type":"Feature","properties":{},"geometry":{"type":"Polygon","coordinates":[[[26.078476,44.417562],[26.078476,44.428114],[26.104405,44.428114],[26.104405,44.417562],[26.078476,44.417562]]]}}]}
+// 1. currently unused download function
 
 function download(data, filename, type) {
     var file = new Blob([data], {type: type});
@@ -18,6 +18,8 @@ function download(data, filename, type) {
     }
 }
 
+// 2. create map and add tilelayer
+
 var map2 = L.map('map2').setView([44.429, 26.105], 13);
         L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -27,8 +29,9 @@ L.tileLayer('https://tiles01.rent-a-planet.com/arhet2-carto/{z}/{x}/{y}.png?{foo
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map2);
 
-        // FeatureGroup is to store editable layers
-var drawnItems = new L.FeatureGroup();
+// 3. initialize drawnitems and add drawcontrol
+
+var drawnItems = new L.FeatureGroup(); // FeatureGroup is to store editable layers
 map2.addLayer(drawnItems);
 var drawControl = new L.Control.Draw({
     edit: {
@@ -38,21 +41,49 @@ var drawControl = new L.Control.Draw({
 
 map2.addControl(drawControl);
 
+// 4. load existing drawn objects with their properties (also edit filename) through geojson data (stored in localstorage)  
+
 dataa = localStorage.getItem('datas1')
 var geeoojson = L.geoJSON(JSON.parse(dataa), {
     onEachFeature: function (feature, layer) {
         layer.addTo(drawnItems);
+        div = L.DomUtil.create('div', 'mydiv')
+        input = L.DomUtil.create('input', 'myinput', div)
+        input.type = 'text'
+        input.placeholder = 'filename'
+        input.value = feature.properties.filename
+        layer.bindPopup(div)
+        const inputHandler = function(o) {
+            layer.feature.properties.filename = o.target.value
+        }
+        input.addEventListener('input', inputHandler)
     }
 }).addTo(map2)
 
+// 5. add objects and their properties when created 
+
 map2.on('draw:created', function(e) {
-    var layer = e.layer,
+    
+    var div = L.DomUtil.create('div', 'mydiv')
+    var input = L.DomUtil.create('input', 'myinput', div)
+    input.type = 'text'
+    input.placeholder = 'filename'
+    
+    var layer = e.layer
+    layer.bindPopup(div)
     feature = layer.feature = layer.feature || {};
 
     feature.type = feature.type || "Feature";
     var props = feature.properties = feature.properties || {};
+    const inputHandler = function(o) {
+        props.filename = o.target.value
+    }
+    input.addEventListener('input', inputHandler)
+    console.log(input.value)
     drawnItems.addLayer(layer);
 });
+
+// 6. when G button is clicked, the drawn objects and properties (drawnItems) is converted to Geojson and saved to localstorage for later to acces it
 
 $(document).ready(function(){
     $('#button').click(function(){

@@ -33,6 +33,7 @@
 }
 
 #btn {
+  visibility: hidden;
   width: 34px;
   height: 34px;
   line-height: 30px;

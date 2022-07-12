@@ -40,8 +40,15 @@ function changeMode(){
         map.setZoom(map.getZoom()-1)             
     }   
 }
+
+// 3. function to show image in fullscreen in a new window when clicked
+
+function openImage() {
+        window.open(document.getElementById('poza1').getAttribute('src'))
     
-// 3. create map
+}
+    
+// 4. create map
 
 var latlng = L.latLng(44.429, 26.105);
 
@@ -51,14 +58,14 @@ var map = L.map('map', {
   doubleClickZoom: false
 })
 
-// 4. add tilelayer
+// 5. add tilelayer
 
 L.tileLayer('https://tiles01.rent-a-planet.com/arhet2-carto/{z}/{x}/{y}.png?{foo}', {
         foo: 'bar', 
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
 
-// 5. displaying the geojson data (objects and properties) on the map from localstorage
+// 6. displaying the geojson data (objects and properties) on the map from localstorage
 
 var myStyle = { // not working (uite-te mai mult la geojson styling)
         "color": "#ff7800",
@@ -74,6 +81,7 @@ var readfromjson = L.geoJSON(JSON.parse(datas.data), {
         if (feature.properties && feature.properties.filename) {
             layer.bindPopup('<img src=' + JSON.stringify(feature.properties.filename) + 'width="100" height="auto" id="imageBox"></img>', {maxWidth: "auto"})
             layer.on('click', function(e) {
+            document.getElementById('btn').style.visibility = 'visible'
             console.log(e)
             console.log(layer)
             document.getElementById("poza1").src=e.target.feature.properties.filename;

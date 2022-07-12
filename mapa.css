@@ -53,3 +53,9 @@
   background-color: #fff;
 }
 
+#mapeditor-link {
+  position: absolute;
+  z-index: 1000;
+  top: 550px;
+  left: 10px;
+}

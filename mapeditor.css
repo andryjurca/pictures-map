@@ -30,3 +30,10 @@
     border-radius: 4px;
     background-color: #fff;
 }
+
+#map-link {
+    position: absolute;
+    z-index: 1000;
+    top: 550px;
+    left: 10px;
+  }

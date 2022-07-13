@@ -95,3 +95,13 @@ $(document).ready(function(){
     })
 })
 
+$(document).ready(function(){
+    $('#download-button').click(function(){
+        newdata = JSON.stringify(drawnItems.toGeoJSON());
+        alert(newdata);
+        datas.writedata(newdata);
+        localStorage.setItem('datas1', datas.data); 
+        download(localStorage.getItem('datas1'), 'newdata.geojson', type=Text)
+    })
+})
+

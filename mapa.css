@@ -33,6 +33,10 @@
 }
 
 #btn {
+  background-image: url('./icons/image.svg');
+  background-size: 15px;
+  background-position: center;
+  background-repeat: no-repeat;
   visibility: hidden;
   width: 34px;
   height: 34px;

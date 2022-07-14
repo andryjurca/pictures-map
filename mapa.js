@@ -86,7 +86,7 @@ var myStyle = { // not working (uite-te mai mult la geojson styling)
 datas.readdata(localStorage.getItem('datas1'))
 
 var readfromjson = L.geoJSON(JSON.parse(datas.data), {
-        style:myStyle, // not working
+        //style:myStyle,
         onEachFeature: function (feature, layer) {   
         if (feature.properties && feature.properties.filename) {
             if (UrlExists(feature.properties.filename)){

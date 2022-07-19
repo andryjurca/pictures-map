@@ -1,0 +1,1 @@
+{"type":"FeatureCollection","features":[{"type":"Feature","properties":{"filename":"./img/palatul.jpg"},"geometry":{"type":"Point","coordinates":[26.102829,44.431819]}},{"type":"Feature","properties":{},"geometry":{"type":"Polygon","coordinates":[[[26.085148,44.415513],[26.085148,44.441624],[26.1236,44.441624],[26.1236,44.415513],[26.085148,44.415513]]]}}]}

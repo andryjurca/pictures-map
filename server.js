@@ -53,7 +53,7 @@ app.get('/getu', (req, res) => {
 
 
 app.post('/postu', (req, res) => {
-    var text1 = req.body.text
+    const text1 = req.body.text
     console.log(text1)
     fs.writeFile('test.txt', text1, (err) => {
         if (err) throw err

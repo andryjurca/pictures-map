@@ -60,7 +60,7 @@ const myStyle = {
         "fillOpacity": 0.90
     };
  
-$.getJSON( "http://localhost:3000/getu", function( data ) {
+$.getJSON( "/getu", function( data ) {
     geojsondata1 = JSON.stringify(data)
     try {
         const readfromjson = L.geoJSON(JSON.parse(geojsondata1), {

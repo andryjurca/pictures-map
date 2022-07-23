@@ -6,7 +6,9 @@ const path = require('path');
 
 const app = express()
 
-app.listen(3000, () => console.log('listening...'))
+const port = process.env.PORT || 3000
+
+app.listen(port, () => console.log('listening...'))
 
 app.use(express.static('public'))
 app.use(bodyParser.urlencoded({ extended: false }));

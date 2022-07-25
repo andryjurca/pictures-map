@@ -62,9 +62,12 @@ app.post('/postu', (req, res) => {
     })
 })
 
+
+const imgFolder = './public/img';
+
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, './public/img')
+        cb(null, imgFolder)
     },
     filename: (req, file, cb) => {
         console.log(file)
@@ -75,6 +78,12 @@ const storage = multer.diskStorage({
 const upload = multer({ storage:storage })
 
 app.post('/upload', upload.single('image'), (req, res) => {
-    res.redirect('/upload.html')
+    filenameList = []
+    fs.readdirSync(imgFolder).forEach(file => {
+        console.log(file);
+        filenameList.push(file)
+      });
+      res.send(filenameList)
+    //res.redirect('/upload.html')
 
 })

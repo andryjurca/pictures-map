@@ -78,12 +78,16 @@ const storage = multer.diskStorage({
 const upload = multer({ storage:storage })
 
 app.post('/upload', upload.single('image'), (req, res) => {
+    
+    res.redirect('/upload.html')
+
+})
+
+app.get('/filenamelist', (req, res) => {
     filenameList = []
     fs.readdirSync(imgFolder).forEach(file => {
         console.log(file);
         filenameList.push(file)
       });
-      res.send(filenameList)
-    //res.redirect('/upload.html')
-
+      res.json(filenameList)
 })

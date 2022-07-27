@@ -1,5 +1,5 @@
 body {
-  background-color: rgb(224, 208, 208);
+  background-color: whitesmoke
 }
 
 #mapeditor-link {
@@ -25,4 +25,31 @@ input[type=submit] {
   color:#fff;
   font-weight:600;
   border-radius:5px;
+}
+
+ul {
+  list-style-type: none;
+}
+
+li {
+  padding: 5px;
+  margin: 5px;
+  font-size: 20px;
+}
+
+#div-list-uploaded {
+  padding: 10px;
+  margin: 10px;
+  background-color: antiquewhite;
+}
+
+form {
+  background-color: antiquewhite;
+  padding: 10px;
+  margin: 10px;
+}
+
+p {
+  font-size: 20px;
+  font-weight: bold;
 }

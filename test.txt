@@ -1,0 +1,1 @@
+{"type":"FeatureCollection","features":[{"type":"Feature","properties":{"filename":"./img/daddycool.jpg"},"geometry":{"type":"Point","coordinates":[26.018718,44.427989]}}]}

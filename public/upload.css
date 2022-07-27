@@ -1,0 +1,55 @@
+body {
+  background-color: whitesmoke
+}
+
+#mapeditor-link {
+  position: absolute;
+  z-index: 1000;
+  top: 550px;
+  left: 10px;
+}
+
+input[type=file] {
+  padding: 10px;
+  margin: 10px;
+  background-color:#828387;
+  color:#fff;
+  font-weight:600;
+  border-radius:5px;
+}
+
+input[type=submit] {
+  padding: 10px;
+  margin: 10px;
+  background-color:#828387;
+  color:#fff;
+  font-weight:600;
+  border-radius:5px;
+}
+
+ul {
+  list-style-type: none;
+}
+
+li {
+  padding: 5px;
+  margin: 5px;
+  font-size: 20px;
+}
+
+#div-list-uploaded {
+  padding: 10px;
+  margin: 10px;
+  background-color: antiquewhite;
+}
+
+form {
+  background-color: antiquewhite;
+  padding: 10px;
+  margin: 10px;
+}
+
+p {
+  font-size: 20px;
+  font-weight: bold;
+}

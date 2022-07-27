@@ -34,6 +34,9 @@ L.tileLayer('https://tiles01.rent-a-planet.com/arhet2-carto/{z}/{x}/{y}.png?{foo
 let drawnItems = new L.FeatureGroup(); // FeatureGroup is to store editable layers
 map2.addLayer(drawnItems);
 let drawControl = new L.Control.Draw({
+    draw: {
+        circle: false
+    },
     edit: {
         featureGroup: drawnItems
     }

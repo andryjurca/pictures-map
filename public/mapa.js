@@ -36,13 +36,19 @@ function openImage() {
 }
     
 // create map
-
-const latlng = L.latLng(44.429, 26.105);
+const lat = 44.429
+const lng = 26.105
+const latlng = L.latLng(lat, lng);
+const boundslatlng1 = L.latLng(lat-0.02, lng-0.02)
+const boundslatlng2 = L.latLng(lat+0.02, lng+0.02)
+const bounds = L.latLngBounds(boundslatlng1, boundslatlng2)
 
 const map = L.map('map', {
   center: latlng,
-  zoom: 15,
-  doubleClickZoom: false
+  zoom: 14,
+  doubleClickZoom: false,
+  maxBounds: bounds,
+  minZoom: 13,
 })
 
 // add tilelayer

@@ -22,7 +22,14 @@
   display: none; /* trebuie schimbat cu flex*/
 }
 
-.div3 {
+#mapeditor-link {
+  position: absolute;
+  z-index: 1000;
+  top: 550px;
+  left: 10px;
+}
+
+/* .div3 { // commented changeMode button div
     position: absolute;
     z-index: 1000;
     top: 90px;
@@ -30,9 +37,9 @@
     pointer-events: visiblePainted;
     pointer-events: auto;
     
-}
+} */
 
-#btn {
+/* #btn { // commented changeMode button
   background-image: url('./icons/image.svg');
   background-size: 15px;
   background-position: center;
@@ -55,11 +62,4 @@
   margin-left: 10px;
   border-radius: 4px;
   background-color: #fff;
-}
-
-#mapeditor-link {
-  position: absolute;
-  z-index: 1000;
-  top: 550px;
-  left: 10px;
-}
+} */

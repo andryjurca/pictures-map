@@ -1,21 +1,34 @@
 // function connected to M button to change the view mode
 
 let clicked_times = 0
+let clicked_times2 = 0
+let currentID = 123456789
+let splitScreen = false
 
 function changeMode(){
     clicked_times += 1
     if (clicked_times%2==0){
-        document.getElementById('map').style.width = '100%';
-        document.getElementById('picture').style.display = 'none';
-        map.invalidateSize();
-        map.setZoom(map.getZoom()+1)
+        normalMode()
     }
     else{
-        document.getElementById('map').style.width = '50%';
-        document.getElementById('picture').style.display = 'flex';
-        map.invalidateSize();
-        map.setZoom(map.getZoom()-1)             
+        splitscreenMode()             
     }   
+}
+
+function normalMode() {
+    document.getElementById('map').style.width = '100%';
+    document.getElementById('picture').style.display = 'none';
+    map.invalidateSize();
+    map.setZoom(map.getZoom()+1)
+    splitScreen = false
+}
+
+function splitscreenMode() {
+    document.getElementById('map').style.width = '50%';
+    document.getElementById('picture').style.display = 'flex';
+    map.invalidateSize();
+    map.setZoom(map.getZoom()-1)
+    splitScreen = true
 }
 
 // function which returns boolean if the url exists
@@ -36,6 +49,7 @@ function openImage() {
 }
     
 // create map
+
 const lat = 44.429
 const lng = 26.105
 const latlng = L.latLng(lat, lng);
@@ -74,16 +88,37 @@ $.getJSON( "/getu", function( data ) {
             onEachFeature: function (feature, layer) {   
                 if (feature.properties && feature.properties.filename) {
                     if (UrlExists(feature.properties.filename)){
-                        layer.bindPopup('<img src=' + JSON.stringify(feature.properties.filename) + 'width="100" height="auto" id="imageBox"></img>', {maxWidth: "auto"})
+                        layer.bindTooltip('<img src=' + JSON.stringify(feature.properties.filename) + 'width="100" height="auto" id="imageBox"></img>', {maxWidth: "auto"})
                         layer.on('click', function(e) {
-                        document.getElementById('btn').style.visibility = 'visible'
-                        console.log(e)
-                        console.log(layer)
-                        document.getElementById("poza1").src=e.target.feature.properties.filename;
+                            sameClicked = currentID == layer._leaflet_id
+                            if (splitScreen) {
+                                if (sameClicked) {
+                                    changeMode();
+                                }
+                                else {
+                                    currentID = layer._leaflet_id
+                                }
+                            }
+
+                            else {
+                                if (sameClicked) {
+                                    changeMode()
+                                }
+                                else {
+                                    changeMode()
+                                    currentID = layer._leaflet_id
+                                }
+                            }
+                            
+                            //document.getElementById('btn').style.visibility = 'visible'
+                            // console.log(e)
+                            // console.log(layer)
+                            document.getElementById("poza1").src=e.target.feature.properties.filename;
+                            
                         })
                     } 
                     else {
-                        layer.bindPopup('Image not found')
+                        layer.bindTooltip('Image not found')
                     }
                 }
             }

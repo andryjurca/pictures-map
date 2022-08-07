@@ -46,7 +46,7 @@ map2.addControl(drawControl);
 
 // load existing drawn objects with their properties (also edit filename) through geojson data (stored in txt file)  
 
-$.getJSON( "/getu", function( data ) {
+$.getJSON( "/getfromdb", function( data ) {
     geojsondata1 = JSON.stringify(data)
     try {
         var geeoojson = L.geoJSON(JSON.parse(geojsondata1), {
@@ -102,7 +102,7 @@ $(document).ready(function(){
         alert(newdata);
         //datas.writedata(newdata);
         //localStorage.setItem('datas1', datas.data);
-        $.post('/postu', {text: newdata})
+        $.post('/posttodb', {text: newdata})
         
 
     })
@@ -116,7 +116,7 @@ $(document).ready(function(){
         alert(newdata);
         //datas.writedata(newdata);
         //localStorage.setItem('datas1', datas.data); 
-        $.post('/postu', {text: newdata})
+        $.post('/posttodb', {text: newdata})
         download(newdata, 'newdata.geojson', type=Text)
     })
 })

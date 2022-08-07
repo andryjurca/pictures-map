@@ -1,8 +1,12 @@
+process.env.NODE_ENV != 'production' ? require('dotenv').config() : null;
 const express = require('express')
 const fs = require('fs')
 const bodyParser = require("body-parser");
 const multer = require('multer');
 const path = require('path');
+const pg = require('pg');
+
+
 
 const app = express()
 
@@ -13,6 +17,8 @@ app.listen(port, () => console.log('listening...'))
 app.use(express.static('public'))
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(express.json())
+
 
 app.get('/getu', (req, res) => {
     fs.open('test.txt','r', function(fileNotExists, file) {
@@ -53,7 +59,6 @@ app.get('/getu', (req, res) => {
     })
 })
 
-
 app.post('/postu', (req, res) => {
     const text1 = req.body.text
     console.log(text1)
@@ -64,7 +69,6 @@ app.post('/postu', (req, res) => {
 
 
 const imgFolder = './public/img';
-
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, imgFolder)
@@ -90,4 +94,25 @@ app.get('/filenamelist', (req, res) => {
         filenameList.push(file)
       });
       res.json(filenameList)
+})
+
+console.log(process.env.DATABASE_URL)
+const client = new pg.Client(process.env.DATABASE_URL);
+client.connect();
+
+app.get('/getfromdb', async(req, res) => {
+    let response = await client.query("SELECT jsondata FROM maps WHERE id=1;");
+    realResponse = response.rows[0].jsondata
+    //res.status(200).send(realResponse)
+    return res.status(200).send(realResponse)
+}) 
+
+app.post('/posttodb', async (req, res) => {
+    let text1 = req.body.text
+    text1 = `'${text1}'`
+    console.log(`the posted geojson data looks like this: ${text1}`)
+    queryContent = `UPDATE maps SET jsondata = ${text1} WHERE id=1;`
+    console.log(`query content is:\n ${queryContent}`)
+    await client.query(queryContent)
+    
 })

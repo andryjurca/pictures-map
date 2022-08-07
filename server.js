@@ -1,4 +1,4 @@
-process.env.NODE_ENV != 'production' ? require('dotenv').config() : null;
+require('dotenv').config();
 const express = require('express')
 const fs = require('fs')
 const bodyParser = require("body-parser");
@@ -96,17 +96,8 @@ app.get('/filenamelist', (req, res) => {
       res.json(filenameList)
 })
 
-//console.log(process.env.DATABASE_URL)
-//const client = new pg.Client(process.env.DATABASE_URL);
-const client = new pg.Client({
-    user: "postgres",
-    password: "andrei11",
-    database: "app",
-    port: 5432,
-    host: "localhost",
-    ssl: process.env.NODE_ENV == 'production' ? true : false
-}); 
-
+console.log(process.env.DATABASE_URL)
+const client = new pg.Client(process.env.DATABASE_URL);
 client.connect();
 
 app.get('/getfromdb', async(req, res) => {

@@ -96,8 +96,17 @@ app.get('/filenamelist', (req, res) => {
       res.json(filenameList)
 })
 
-console.log(process.env.DATABASE_URL)
-const client = new pg.Client(process.env.DATABASE_URL);
+//console.log(process.env.DATABASE_URL)
+//const client = new pg.Client(process.env.DATABASE_URL);
+const client = new pg.Client({
+    user: "postgres",
+    password: "andrei11",
+    database: "app",
+    port: 5432,
+    host: "localhost",
+    ssl: process.env.NODE_ENV == 'production' ? true : false
+}); 
+
 client.connect();
 
 app.get('/getfromdb', async(req, res) => {

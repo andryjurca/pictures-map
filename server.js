@@ -96,8 +96,14 @@ app.get('/filenamelist', (req, res) => {
       res.json(filenameList)
 })
 
+testString = 'porc'
+
+console.log('postgres://postgres:andrei11@localhost:5432/app')
 console.log(process.env.DATABASE_URL)
-const client = new pg.Client(process.env.DATABASE_URL);
+const client = new pg.Client({
+    connectionString: process.env.DATABASE_URL || 'postgres://postgres:andrei11@localhost:5432/app',
+    ssl: process.env.DATABASE_URL ? true : false
+});
 client.connect();
 
 app.get('/getfromdb', async(req, res) => {

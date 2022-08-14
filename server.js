@@ -1,4 +1,3 @@
-process.env.NODE_ENV != 'production' ? require('dotenv').config() : null;
 const express = require('express')
 const fs = require('fs')
 const bodyParser = require("body-parser");
@@ -7,13 +6,9 @@ const path = require('path');
 const pg = require('pg');
 
 
-
 const app = express()
-
 const port = process.env.PORT || 3000
-
 app.listen(port, () => console.log('listening...'))
-
 app.use(express.static('public'))
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -96,13 +91,17 @@ app.get('/filenamelist', (req, res) => {
       res.json(filenameList)
 })
 
-testString = 'porc'
 
-console.log('postgres://postgres:andrei11@localhost:5432/app')
-console.log(process.env.DATABASE_URL)
+process.env.NODE_ENV != 'production' ? require('dotenv').config() : null;
+
+localdbLink = 'postgres://postgres:andrei11@localhost:5432/app'
+productiondbLink = process.env.DATABASE_URL
+
+console.log(localdbLink)
+console.log(productiondbLink)
 const client = new pg.Client({
-    connectionString: process.env.DATABASE_URL || 'postgres://postgres:andrei11@localhost:5432/app',
-    ssl: process.env.DATABASE_URL ? true : false,
+    connectionString: productiondbLink || localdbLink,
+    ssl: productiondbLink ? true : false,
 });
 client.connect();
 

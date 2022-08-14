@@ -3,7 +3,7 @@ const fs = require('fs')
 const bodyParser = require("body-parser");
 const multer = require('multer');
 const path = require('path');
-const pg = require('pg');
+const { Client } = require('pg');
 
 
 const app = express()
@@ -99,9 +99,13 @@ productiondbLink = process.env.DATABASE_URL
 
 console.log(localdbLink)
 console.log(productiondbLink)
-const client = new pg.Client({
-    connectionString: productiondbLink || localdbLink,
-    ssl: productiondbLink ? true : false,
+const client = new Client({
+    // connectionString: productiondbLink || localdbLink,
+    // ssl: productiondbLink ? true : false,
+    connectionString: process.env.DATABASE_URL,
+    ssl: {
+        rejectUnauthorized: false
+      }
 });
 client.connect();
 

@@ -91,33 +91,28 @@ app.get('/filenamelist', (req, res) => {
 })
 
 
-let client;
-
 // acum fac rehetul
-if (process.NODE_ENV != 'production') {
-    require('dotenv').config()
-    console.log('the app is running locally.')
-    localdbLink = 'postgres://postgres:andrei11@localhost:5432/app'
-    console.log(localdbLink)
-    client = new Client({
-        connectionString: localdbLink,
-        ssl: false,
-    });
-    client.connect();
+    // require('dotenv').config()
+    // console.log('the app is running locally.')
+    
+    // console.log(localdbLink)
+    // client = new Client({
+    //     connectionString: localdbLink,
+    //     ssl: false,
+    // });
 
-}
-else {
-    console.log('the app is running in production')
-    productiondbLink = process.env.DATABASE_URL    
-    console.log(productiondbLink)
-    client = new Client({
-        connectionString: process.env.DATABASE_URL,
-        ssl: {
-            rejectUnauthorized: false
-        }
-    });
-}
-    client.connect();
+console.log('the app is running in production')
+localdbLink = 'postgres://postgres:andrei11@localhost:5432/app'
+productiondbLink = process.env.DATABASE_URL    
+console.log(productiondbLink)
+
+const client = new Client({
+    connectionString: process.env.DATABASE_URL,
+    ssl: {
+        rejectUnauthorized: false
+    }
+});
+client.connect();
 
 app.get('/getfromdb', async(req, res) => {
     let response = await client.query("SELECT jsondata FROM maps WHERE id=1;");

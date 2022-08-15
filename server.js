@@ -110,7 +110,7 @@ else {
     productiondbLink = process.env.DATABASE_URL    
     console.log(productiondbLink)
     client = new Client({
-        connectionString: process.env.DATABASE_URL,
+        connectionString: productiondbLink,
         ssl: {
             rejectUnauthorized: false
         }

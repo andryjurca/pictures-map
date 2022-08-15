@@ -90,11 +90,8 @@ app.get('/filenamelist', (req, res) => {
       res.json(filenameList)
 })
 
-// acum fac rehetul
 
-if (process.NODE_ENV != 'production') {
-    require('dotenv').config()
-}
+process.env.NODE_ENV != 'production' ? require('dotenv').config() : null;
 
 console.log('the app is running in production')
 localdbLink = 'postgres://postgres:andrei11@localhost:5432/app'

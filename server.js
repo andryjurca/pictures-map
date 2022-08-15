@@ -105,7 +105,7 @@ if (process.NODE_ENV != 'production') {
     client.connect();
 
 }
-else {
+if (process.env.NODE_ENV == 'production') {
     console.log('the app is running in production')
     productiondbLink = process.env.DATABASE_URL    
     console.log(productiondbLink)

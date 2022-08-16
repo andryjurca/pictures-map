@@ -91,23 +91,14 @@ app.get('/filenamelist', (req, res) => {
 })
 
 
-// acum fac rehetul
-    // require('dotenv').config()
-    // console.log('the app is running locally.')
-    
-    // console.log(localdbLink)
-    // client = new Client({
-    //     connectionString: localdbLink,
-    //     ssl: false,
-    // });
 
 process.env.NODE_ENV != 'production' ? require('dotenv').config() : null;
-localdbLink = 'postgres://postgres:andrei11@localhost:5432/app'
+const localdblink = process.env.LOCAL_DATABASE_URL
 productiondbLink = process.env.DATABASE_URL    
-console.log(productiondbLink)
+console.log(localdblink)
 
 const client = new Client({
-    connectionString: productiondbLink || localdbLink,
+    connectionString: productiondbLink || localdblink,
     ssl: process.env.DATABASE_URL ? { rejectUnauthorized: false } : false
 });
 

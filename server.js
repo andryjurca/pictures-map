@@ -4,7 +4,9 @@ const bodyParser = require("body-parser");
 const multer = require('multer');
 const path = require('path');
 const { Client } = require('pg');
+const cloudinary = require('cloudinary')
 
+// express app
 
 const app = express()
 const port = process.env.PORT || 3000
@@ -13,6 +15,9 @@ app.use(express.static('public'))
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.json())
+
+
+// 1. read and write files on the filesystem (not used)
 
 app.get('/getu', (req, res) => {
     fs.open('test.txt','r', function(fileNotExists, file) {
@@ -62,6 +67,8 @@ app.post('/postu', (req, res) => {
 })
 
 
+// 2. upload images to the server's filesystem
+
 const imgFolder = './public/img';
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -91,11 +98,11 @@ app.get('/filenamelist', (req, res) => {
 })
 
 
+// 3. database postgres connection
 
 process.env.NODE_ENV != 'production' ? require('dotenv').config() : null;
 const localdblink = process.env.LOCAL_DATABASE_URL
-productiondbLink = process.env.DATABASE_URL    
-console.log(localdblink)
+const productiondbLink = process.env.DATABASE_URL    
 
 const client = new Client({
     connectionString: productiondbLink || localdblink,
@@ -107,7 +114,6 @@ client.connect();
 app.get('/getfromdb', async(req, res) => {
     let response = await client.query("SELECT jsondata FROM maps WHERE id=1;");
     realResponse = response.rows[0].jsondata
-    //res.status(200).send(realResponse)
     return res.status(200).send(realResponse)
 }) 
 
@@ -120,3 +126,15 @@ app.post('/posttodb', async (req, res) => {
     await client.query(queryContent)
     
 })
+
+// cloudinary store images in cloud
+
+cloudinary.config({ 
+    cloud_name: process.env.CLOUD_NAME, 
+    api_key: process.env.API_KEY, 
+    api_secret: process.env.API_SECRET 
+});
+
+cloudinary.v2.uploader.upload("https://upload.wikimedia.org/wikipedia/commons/a/ae/Olympic_flag.jpg",
+  { public_id: "olympic_flag" }, 
+  function(error, result) {console.log(`results ${result}`); });

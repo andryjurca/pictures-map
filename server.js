@@ -101,17 +101,20 @@ app.get('/filenamelist', (req, res) => {
     //     ssl: false,
     // });
 
+process.env.NODE_ENV != 'production' ? require('dotenv').config() : null;
 console.log('the app is running in production')
 localdbLink = 'postgres://postgres:andrei11@localhost:5432/app'
 productiondbLink = process.env.DATABASE_URL    
 console.log(productiondbLink)
 
 const client = new Client({
-    connectionString: process.env.DATABASE_URL,
-    ssl: {
-        rejectUnauthorized: false
-    }
+    connectionString: productiondbLink || localdbLink,
+    ssl: process.env.DATABASE_URL ? true : false
+    // ssl: {
+    //     rejectUnauthorized: false
+    // }
 });
+
 client.connect();
 
 app.get('/getfromdb', async(req, res) => {

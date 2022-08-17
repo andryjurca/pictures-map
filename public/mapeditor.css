@@ -68,10 +68,3 @@
     top: 550px;
     left: 10px;
   }
-
-  #upload-link {
-    position: absolute;
-    z-index: 1000;
-    top: 550px;
-    left: 100px;
-  }  

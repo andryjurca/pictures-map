@@ -95,17 +95,17 @@ const myStyle = {
 //     iconSize: [30, 30]
 //     });
 
-const leafIcon = L.Icon.extend({
-    options: {
-        iconSize:     [50, 50] // Change icon size according to zoom level
-    }
-});
+// const leafIcon = L.Icon.extend({
+//     options: {
+//         iconSize:     [50, 50] // Change icon size according to zoom level
+//     }
+// });
 
-const leafIcon2 = L.Icon.extend({
-    options: {
-        iconSize:     [10, 10] // Change icon size according to zoom level
-    }
-});
+// const leafIcon2 = L.Icon.extend({
+//     options: {
+//         iconSize:     [10, 10] // Change icon size according to zoom level
+//     }
+// });
 
  
 $.getJSON( "/getfromdb", function( data ) {
@@ -147,14 +147,9 @@ $.getJSON( "/getfromdb", function( data ) {
                         // console.log(e)
                         // console.log(layer)
                         src1 = `https://res.cloudinary.com/hzyfr8ajt/image/upload/map-pictures/${feature.properties.filename}`
-                        console.log(src1)
+                        //console.log(src1)
                         document.getElementById("poza1").src=src1
-                    })
-                        
-                    
-                    
-                            
-                        
+                    })      
                         
                 } 
                     
@@ -168,16 +163,16 @@ $.getJSON( "/getfromdb", function( data ) {
     // }
 });
 
-map.on('zoomend', function() {
-    const currentZoom = map.getZoom(); 
-    console.log(currentZoom)
-    if (currentZoom > 15) { 
-        console.log('aproape')
-    }
-    else {
-        console.log('departe')
-    }
+// map.on('zoomend', function() {
+//     const currentZoom = map.getZoom(); 
+//     console.log(currentZoom)
+//     if (currentZoom > 15) { 
+//         console.log('aproape')
+//     }
+//     else {
+//         console.log('departe')
+//     }
         
-})
+
 
 

@@ -121,9 +121,9 @@ app.get('/getfromdb', async(req, res) => {
 app.post('/posttodb', async (req, res) => {
     let text1 = req.body.text
     text1 = `'${text1}'`
-    console.log(`the posted geojson data looks like this: ${text1}`)
+    //console.log(`the posted geojson data looks like this: ${text1}`)
     queryContent = `UPDATE maps SET jsondata = ${text1} WHERE id=1;`
-    console.log(`query content is:\n ${queryContent}`)
+    //console.log(`query content is:\n ${queryContent}`)
     await client.query(queryContent)
     
 })
@@ -142,13 +142,13 @@ cloudinary.config({
 });
 
 cloudinary.api.resources({type:"upload",prefix:"map-pictures/"}, function(error, result){
-    console.log(error, result)
+    //console.log(error, result)
     //console.log(typeof(result.resources.length))
     urlList = []
     result.resources.forEach(image => {
         const url = JSON.stringify(image.secure_url)
         const relativeUrl = url.split("/map-pictures/")[1].slice(0, -1)
-        console.log(relativeUrl)
+        //console.log(relativeUrl)
         urlList.push(relativeUrl)
         
     })
@@ -165,8 +165,8 @@ function add(path) {
         console.log(result, error || 'You succesfully uploaded the image to cloudinary!');
         imageURL = result.secure_url
         console.log(imageURL)
-        imagesUrlList.push(imageURL)
-        console.log(`the current url list: ${imagesUrlList}`)
+        urlList.push(imageURL)
+        console.log(`the current url list: ${urlList}`)
     }
 )}
 
@@ -174,7 +174,7 @@ function del(id) {
     cloudinary.uploader.destroy(id, function(result) { console.log(result) });
 }
 
-//add("./public/img/crimsonu.jpg")
+// add("./public/img/crimsonu.jpg")
 // del('cld-sample')
 
 

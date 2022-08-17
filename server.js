@@ -4,7 +4,8 @@ const bodyParser = require("body-parser");
 const multer = require('multer');
 const path = require('path');
 const { Client } = require('pg');
-const cloudinary = require('cloudinary')
+const { url } = require('inspector');
+const cloudinary = require('cloudinary').v2
 
 // express app
 
@@ -129,8 +130,51 @@ app.post('/posttodb', async (req, res) => {
 
 // cloudinary store images in cloud
 
+const cloud_name = process.env.CLOUD_NAME 
+const api_key = process.env.API_KEY
+const api_secret = process.env.API_SECRET
+
 cloudinary.config({ 
-    cloud_name: process.env.CLOUD_NAME, 
-    api_key: process.env.API_KEY, 
-    api_secret: process.env.API_SECRET 
+    cloud_name: cloud_name, 
+    api_key: api_key, 
+    api_secret: api_secret, 
+    secure: true,
 });
+
+cloudinary.api.resources({type:"upload",prefix:"map-pictures/"}, function(error, result){
+    //console.log(error, result)
+    //console.log(typeof(result.resources.length))
+    urlList = []
+    result.resources.forEach(image => {
+        const url = JSON.stringify(image.secure_url)
+        const relativeUrl = url.split("/map-pictures/")[1].slice(0, -1)
+        console.log(relativeUrl)
+        urlList.push(relativeUrl)
+        
+    })
+})
+
+app.get('/cloudimagelist', (req, res) => {
+    console.log(urlList)
+    console.log('am actualizat porc gras')
+    res.json(urlList)
+})
+
+function add(path) {
+    cloudinary.uploader.upload(path, {upload_preset: "test-preset", use_filename: true, unique_filename: false, folder: 'map-pictures'}, (error, result)=>{
+        console.log(result, error || 'You succesfully uploaded the image to cloudinary!');
+        imageURL = result.secure_url
+        console.log(imageURL)
+        imagesUrlList.push(imageURL)
+        console.log(`the current url list: ${imagesUrlList}`)
+    }
+)}
+
+function del(id) {
+    cloudinary.uploader.destroy(id, function(result) { console.log(result) });
+}
+
+//add("./public/img/crimsonu.jpg")
+// del('cld-sample')
+
+

@@ -56,7 +56,7 @@ $.getJSON( "/getfromdb", function( data ) {
                 input = L.DomUtil.create('input', 'myinput', div)
                 input.type = 'text'
                 input.placeholder = 'filename'
-                if (UrlExists(feature.properties.filename)) 
+                //if (UrlExists(feature.properties.filename)) 
                     input.value = feature.properties.filename                
                 layer.bindPopup(div)
                 const inputHandler = function(o) {
@@ -68,6 +68,7 @@ $.getJSON( "/getfromdb", function( data ) {
     }
     catch(e) {
         console.log('loaded geojson data is invalid')
+        console.log(e)
     }
 });
 
@@ -94,14 +95,12 @@ map2.on('draw:created', function(e) {
     drawnItems.addLayer(layer);
 });
 
-// when save button is clicked, the drawn objects and properties (drawnItems) is converted to Geojson and saved to txt for later to read it
+// when save button is clicked, the drawn objects and properties (drawnItems) is converted to Geojson and saved to the server
 
 $(document).ready(function(){
     $('#button').click(function(){
         newdata = JSON.stringify(drawnItems.toGeoJSON());
         alert(newdata);
-        //datas.writedata(newdata);
-        //localStorage.setItem('datas1', datas.data);
         $.post('/posttodb', {text: newdata})
         
 
@@ -114,8 +113,6 @@ $(document).ready(function(){
     $('#download-button').click(function(){
         newdata = JSON.stringify(drawnItems.toGeoJSON());
         alert(newdata);
-        //datas.writedata(newdata);
-        //localStorage.setItem('datas1', datas.data); 
         $.post('/posttodb', {text: newdata})
         download(newdata, 'newdata.geojson', type=Text)
     })

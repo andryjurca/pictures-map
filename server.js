@@ -142,7 +142,7 @@ cloudinary.config({
 });
 
 cloudinary.api.resources({type:"upload",prefix:"map-pictures/"}, function(error, result){
-    //console.log(error, result)
+    console.log(error, result)
     //console.log(typeof(result.resources.length))
     urlList = []
     result.resources.forEach(image => {

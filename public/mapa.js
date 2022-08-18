@@ -91,9 +91,17 @@ const myStyle = {
         "fillOpacity": 0.90
     };
 
-// const circleIcon = L.icon({
-//     iconSize: [30, 30]
-//     });
+const Icon = L.icon({
+    iconUrl: './icons/arrow.svg', 
+    iconAnchor: [10, 10],
+    iconSize: [30, 30]
+});
+
+const Icon2 = L.icon({
+    iconUrl: './icons/arrow.svg', 
+    iconAnchor: [10, 10],
+    iconSize: [10, 10]
+});
 
 // const leafIcon = L.Icon.extend({
 //     options: {
@@ -113,8 +121,12 @@ $.getJSON( "/getfromdb", function( data ) {
     // try {
         const readfromjson = L.geoJSON(JSON.parse(geojsondata1), {
             //style:myStyle,
-            pointToLayer: function(point, latlng) {
-                return L.circleMarker(latlng, {radius:10})
+            pointToLayer: function(feature, latlng) {
+                // return L.circleMarker(latlng, {radius:10})
+                if (feature.properties.angle) 
+                    return L.marker(latlng, { icon:Icon, opacity: 0.5, rotationAngle: feature.properties.angle })
+                else
+                    return L.marker(latlng, { icon:Icon, opacity: 0.5 })
 
               },
             onEachFeature: function (feature, layer) {   
@@ -171,7 +183,11 @@ $.getJSON( "/getfromdb", function( data ) {
 //     }
 //     else {
 //         console.log('departe')
+//         map.eachLayer(function (layer) {
+//             console.log(layer)
+//         })
 //     }
+// })
         
 
 

@@ -53,16 +53,28 @@ $.getJSON( "/getfromdb", function( data ) {
             onEachFeature: function (feature, layer) {
                 layer.addTo(drawnItems);
                 div = L.DomUtil.create('div', 'mydiv')
+
                 input = L.DomUtil.create('input', 'myinput', div)
                 input.type = 'text'
                 input.placeholder = 'filename'
                 //if (UrlExists(feature.properties.filename)) 
-                    input.value = feature.properties.filename                
+                input.value = feature.properties.filename                
                 layer.bindPopup(div)
                 const inputHandler = function(o) {
                     layer.feature.properties.filename = o.target.value
                 }
                 input.addEventListener('input', inputHandler)
+
+                input2 = L.DomUtil.create('input', 'myinput2', div)
+                input2.type = 'text'
+                input2.placeholder = 'angle'
+                //if (UrlExists(feature.properties.filename)) 
+                input2.value = feature.properties.angle                
+                layer.bindPopup(div)
+                const inputHandler2 = function(o) {
+                    layer.feature.properties.angle = o.target.value
+                }
+                input2.addEventListener('input', inputHandler2)
             }
         }).addTo(map2)
     }
@@ -80,6 +92,10 @@ map2.on('draw:created', function(e) {
     const input = L.DomUtil.create('input', 'myinput', div)
     input.type = 'text'
     input.placeholder = 'filename'
+
+    const input2 = L.DomUtil.create('input', 'myinput', div)
+    input2.type = 'text'
+    input2.placeholder = 'angle'
     
     const layer = e.layer
     layer.bindPopup(div)
@@ -92,6 +108,16 @@ map2.on('draw:created', function(e) {
     }
     input.addEventListener('input', inputHandler)
     console.log(input.value)
+
+    const inputHandler2 = function(o) {
+        props.angle = o.target.value
+    }
+
+    input2.addEventListener('input', inputHandler2)
+    console.log(input2.value)
+
+    
+
     drawnItems.addLayer(layer);
 });
 

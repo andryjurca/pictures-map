@@ -132,7 +132,7 @@ $.getJSON( "/getfromdb", function( data ) {
               },
             onEachFeature: function (feature, layer) {   
                 if (feature.properties && feature.properties.filename) {
-                    popupContent = `'${'<img src=' + JSON.stringify(`https://res.cloudinary.com/hzyfr8ajt/image/upload/map-pictures/${feature.properties.filename} `) + 'width="100" height="auto" id="imageBox"></img>'}'`
+                    popupContent = `${'<img src=' + JSON.stringify(`https://res.cloudinary.com/hzyfr8ajt/image/upload/map-pictures/${feature.properties.filename} `) + 'width="100" height="auto" id="imageBox"></img>'}`
                     layer.bindTooltip(popupContent, { direction: 'top' })
                     
                     layer.on('click', function(e) {

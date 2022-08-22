@@ -74,7 +74,7 @@ $.getJSON( "/getfromdb", function( data ) {
                 const inputHandler2 = function(o) {
                     layer.feature.properties.angle = o.target.value
                 }
-                input2.addEventListener('input', inputHandler3)
+                input2.addEventListener('input', inputHandler2)
 
                 input3 = L.DomUtil.create('input', 'myinput3', div)
                 input3.type = 'text'

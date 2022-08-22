@@ -93,57 +93,57 @@ const myStyle = {
 
 const orangeArrowIcon = L.icon({
     iconUrl: './icons/orangearrow.svg', 
-    iconAnchor: [15, 15],
-    iconSize: [30, 30],
+    iconAnchor: [5, 5],
+    iconSize: [15, 15],
     
 });
 
 const orangeIcon = L.icon({
     iconUrl: './icons/orange.svg', 
-    iconAnchor: [15, 15],
-    iconSize: [30, 30],
+    iconAnchor: [5, 5],
+    iconSize: [15, 15],
     
 });
 
 const redArrowIcon = L.icon({
     iconUrl: './icons/redarrow.svg', 
-    iconAnchor: [15, 15],
-    iconSize: [30, 30],
+    iconAnchor: [5, 5],
+    iconSize: [15, 15]
     
 });
 
 const redIcon = L.icon({
     iconUrl: './icons/red.svg', 
-    iconAnchor: [15, 15],
-    iconSize: [30, 30],
+    iconAnchor: [5, 5],
+    iconSize: [15, 15],
     
 });
 
 const yellowArrowIcon = L.icon({
     iconUrl: './icons/yellowarrow.svg', 
-    iconAnchor: [15, 15],
-    iconSize: [30, 30],
+    iconAnchor: [5, 5],
+    iconSize: [15, 15],
     
 });
 
 const yellowIcon = L.icon({
     iconUrl: './icons/yellow.svg', 
-    iconAnchor: [15, 15],
-    iconSize: [30, 30],
+    iconAnchor: [5, 5],
+    iconSize: [15, 15],
     
 });
 
 const greyArrowIcon = L.icon({
     iconUrl: './icons/greyarrow.svg', 
-    iconAnchor: [15, 15],
-    iconSize: [30, 30],
+    iconAnchor: [5, 5],
+    iconSize: [15, 15],
     
 });
 
 const greyIcon = L.icon({
     iconUrl: './icons/grey.svg', 
-    iconAnchor: [15, 15],
-    iconSize: [30, 30],
+    iconAnchor: [5, 5],
+    iconSize: [15, 15],
     
 });
 

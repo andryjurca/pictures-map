@@ -159,39 +159,41 @@ $.getJSON( "/getfromdb", function( data ) {
                 // return L.circleMarker(latlng, {radius:10})
                 if (feature.properties.angle) {
                     if (feature.properties.year < 1914) {
-                        return L.marker(latlng, { icon:yellowArrowIcon, opacity: 0.6, rotationAngle: feature.properties.angle })
+                        return L.marker(latlng, { icon:yellowArrowIcon, opacity: 0.8, rotationAngle: feature.properties.angle })
                     }
                         
                     if (feature.properties.year >= 1914 & feature.properties.year <= 1945) {
-                        return L.marker(latlng, { icon:orangeArrowIcon, opacity: 0.6, rotationAngle: feature.properties.angle })
+                        return L.marker(latlng, { icon:orangeArrowIcon, opacity: 0.8, rotationAngle: feature.properties.angle })
                     }
                         
                     if (feature.properties.year > 1945) {
-                        return L.marker(latlng, { icon:redArrowIcon, opacity: 0.6, rotationAngle: feature.properties.angle })
+                        return L.marker(latlng, { icon:redArrowIcon, opacity: 0.8, rotationAngle: feature.properties.angle })
                     }
                         
                     else {
-                        return L.marker(latlng, { icon:greyArrowIcon, opacity: 0.6, rotationAngle: feature.properties.angle })
+                        return L.marker(latlng, { icon:greyArrowIcon, opacity: 0.8, rotationAngle: feature.properties.angle })
                     } 
                         
                 } 
                     
-                else
+                else {
                     if (feature.properties.year < 1914) {
-                        return L.marker(latlng, { icon:yellowIcon, opacity: 0.6 })
+                        return L.marker(latlng, { icon:yellowIcon, opacity: 0.8 })
                     }
                         
                     if (feature.properties.year >= 1914 & feature.properties.year <= 1945) {
-                        return L.marker(latlng, { icon:orangeIcon, opacity: 0.6 })
+                        return L.marker(latlng, { icon:orangeIcon, opacity: 0.8 })
                     }
                         
                     if (feature.properties.year > 1945) {
-                        return L.marker(latlng, { icon:redIcon, opacity: 0.6 })
+                        return L.marker(latlng, { icon:redIcon, opacity: 0.8 })
                     }
                         
                     else {
-                        return L.marker(latlng, { icon:greyIcon, opacity:0.6 })
+                        return L.marker(latlng, { icon:greyIcon, opacity:0.8 })
                     }
+                }
+                    
                         
 
               },

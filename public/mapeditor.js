@@ -58,8 +58,8 @@ $.getJSON( "/getfromdb", function( data ) {
                 input.type = 'text'
                 input.placeholder = 'filename'
                 //if (UrlExists(feature.properties.filename)) 
-                input.value = feature.properties.filename                
-                layer.bindPopup(div)
+                input.value = feature.properties.filename || ''                 
+                //layer.bindPopup(div)
                 const inputHandler = function(o) {
                     layer.feature.properties.filename = o.target.value
                 }
@@ -69,12 +69,23 @@ $.getJSON( "/getfromdb", function( data ) {
                 input2.type = 'text'
                 input2.placeholder = 'angle'
                 //if (UrlExists(feature.properties.filename)) 
-                input2.value = feature.properties.angle                
-                layer.bindPopup(div)
+                input2.value = feature.properties.angle || ''                
+                //layer.bindPopup(div)
                 const inputHandler2 = function(o) {
                     layer.feature.properties.angle = o.target.value
                 }
-                input2.addEventListener('input', inputHandler2)
+                input2.addEventListener('input', inputHandler3)
+
+                input3 = L.DomUtil.create('input', 'myinput3', div)
+                input3.type = 'text'
+                input3.placeholder = 'year'
+                //if (UrlExists(feature.properties.filename)) 
+                input3.value = feature.properties.year || ''                
+                layer.bindPopup(div)
+                const inputHandler3 = function(o) {
+                    layer.feature.properties.year = o.target.value
+                }
+                input3.addEventListener('input', inputHandler3)
             }
         }).addTo(map2)
     }
@@ -93,9 +104,13 @@ map2.on('draw:created', function(e) {
     input.type = 'text'
     input.placeholder = 'filename'
 
-    const input2 = L.DomUtil.create('input', 'myinput', div)
+    const input2 = L.DomUtil.create('input', 'myinput2', div)
     input2.type = 'text'
     input2.placeholder = 'angle'
+
+    const input3 = L.DomUtil.create('input', 'myinput3', div)
+    input3.type = 'text'
+    input3.placeholder = 'year'
     
     const layer = e.layer
     layer.bindPopup(div)
@@ -115,6 +130,13 @@ map2.on('draw:created', function(e) {
 
     input2.addEventListener('input', inputHandler2)
     console.log(input2.value)
+
+    const inputHandler3 = function(o) {
+        props.year = o.target.value
+    }
+
+    input3.addEventListener('input', inputHandler3)
+    console.log(input3.value)
 
     
 

@@ -91,30 +91,63 @@ const myStyle = {
         "fillOpacity": 0.90
     };
 
-const Icon = L.icon({
-    iconUrl: './icons/arrow.svg', 
+const orangeArrowIcon = L.icon({
+    iconUrl: './icons/orangearrow.svg', 
     iconAnchor: [15, 15],
     iconSize: [30, 30],
     
 });
 
-const Icon2 = L.icon({
-    iconUrl: './icons/arrow.svg', 
-    iconAnchor: [10, 10],
-    iconSize: [10, 10]
+const orangeIcon = L.icon({
+    iconUrl: './icons/orange.svg', 
+    iconAnchor: [15, 15],
+    iconSize: [30, 30],
+    
 });
 
-// const leafIcon = L.Icon.extend({
-//     options: {
-//         iconSize:     [50, 50] // Change icon size according to zoom level
-//     }
-// });
+const redArrowIcon = L.icon({
+    iconUrl: './icons/redarrow.svg', 
+    iconAnchor: [15, 15],
+    iconSize: [30, 30],
+    
+});
 
-// const leafIcon2 = L.Icon.extend({
-//     options: {
-//         iconSize:     [10, 10] // Change icon size according to zoom level
-//     }
-// });
+const redIcon = L.icon({
+    iconUrl: './icons/red.svg', 
+    iconAnchor: [15, 15],
+    iconSize: [30, 30],
+    
+});
+
+const yellowArrowIcon = L.icon({
+    iconUrl: './icons/yellowarrow.svg', 
+    iconAnchor: [15, 15],
+    iconSize: [30, 30],
+    
+});
+
+const yellowIcon = L.icon({
+    iconUrl: './icons/yellow.svg', 
+    iconAnchor: [15, 15],
+    iconSize: [30, 30],
+    
+});
+
+const greyArrowIcon = L.icon({
+    iconUrl: './icons/greyarrow.svg', 
+    iconAnchor: [15, 15],
+    iconSize: [30, 30],
+    
+});
+
+const greyIcon = L.icon({
+    iconUrl: './icons/grey.svg', 
+    iconAnchor: [15, 15],
+    iconSize: [30, 30],
+    
+});
+
+
 
  
 $.getJSON( "/getfromdb", function( data ) {
@@ -124,10 +157,42 @@ $.getJSON( "/getfromdb", function( data ) {
             //style:myStyle,
             pointToLayer: function(feature, latlng) {
                 // return L.circleMarker(latlng, {radius:10})
-                if (feature.properties.angle) 
-                    return L.marker(latlng, { icon:Icon, opacity: 0.5, rotationAngle: feature.properties.angle })
+                if (feature.properties.angle) {
+                    if (feature.properties.year < 1914) {
+                        return L.marker(latlng, { icon:yellowArrowIcon, opacity: 0.6, rotationAngle: feature.properties.angle })
+                    }
+                        
+                    if (feature.properties.year >= 1914 & feature.properties.year <= 1945) {
+                        return L.marker(latlng, { icon:orangeArrowIcon, opacity: 0.6, rotationAngle: feature.properties.angle })
+                    }
+                        
+                    if (feature.properties.year > 1945) {
+                        return L.marker(latlng, { icon:redArrowIcon, opacity: 0.6, rotationAngle: feature.properties.angle })
+                    }
+                        
+                    else {
+                        return L.marker(latlng, { icon:greyArrowIcon, opacity: 0.6, rotationAngle: feature.properties.angle })
+                    } 
+                        
+                } 
+                    
                 else
-                    return L.marker(latlng, { icon:Icon, opacity: 0.5 })
+                    if (feature.properties.year < 1914) {
+                        return L.marker(latlng, { icon:yellowIcon, opacity: 0.6 })
+                    }
+                        
+                    if (feature.properties.year >= 1914 & feature.properties.year <= 1945) {
+                        return L.marker(latlng, { icon:orangeIcon, opacity: 0.6 })
+                    }
+                        
+                    if (feature.properties.year > 1945) {
+                        return L.marker(latlng, { icon:redIcon, opacity: 0.6 })
+                    }
+                        
+                    else {
+                        return L.marker(latlng, { icon:greyIcon, opacity:0.6 })
+                    }
+                        
 
               },
             onEachFeature: function (feature, layer) {   

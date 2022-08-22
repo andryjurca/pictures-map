@@ -93,56 +93,56 @@ const myStyle = {
 
 const orangeArrowIcon = L.icon({
     iconUrl: './icons/orangearrow.svg', 
-    iconAnchor: [5, 5],
+    iconAnchor: [7.5, 8.5],
     iconSize: [15, 15],
     
 });
 
 const orangeIcon = L.icon({
     iconUrl: './icons/orange.svg', 
-    iconAnchor: [5, 5],
+    iconAnchor: [7.5, 8.5],
     iconSize: [15, 15],
     
 });
 
-const redArrowIcon = L.icon({
-    iconUrl: './icons/redarrow.svg', 
-    iconAnchor: [5, 5],
+const darkblueArrowIcon = L.icon({
+    iconUrl: './icons/darkbluearrow.svg', 
+    iconAnchor: [7.5, 8.5],
     iconSize: [15, 15]
     
 });
 
-const redIcon = L.icon({
-    iconUrl: './icons/red.svg', 
-    iconAnchor: [5, 5],
+const darkblueIcon = L.icon({
+    iconUrl: './icons/darkblue.svg', 
+    iconAnchor: [7.5, 8.5],
     iconSize: [15, 15],
     
 });
 
-const yellowArrowIcon = L.icon({
-    iconUrl: './icons/yellowarrow.svg', 
-    iconAnchor: [5, 5],
+const middleblueArrowIcon = L.icon({
+    iconUrl: './icons/middlebluearrow.svg', 
+    iconAnchor: [7.5, 8.5],
     iconSize: [15, 15],
     
 });
 
-const yellowIcon = L.icon({
-    iconUrl: './icons/yellow.svg', 
-    iconAnchor: [5, 5],
+const middleblueIcon = L.icon({
+    iconUrl: './icons/middleblue.svg', 
+    iconAnchor: [7.5, 8.5],
     iconSize: [15, 15],
     
 });
 
-const greyArrowIcon = L.icon({
-    iconUrl: './icons/greyarrow.svg', 
-    iconAnchor: [5, 5],
+const lightblueArrowIcon = L.icon({
+    iconUrl: './icons/lightbluearrow.svg', 
+    iconAnchor: [7.5, 8.5],
     iconSize: [15, 15],
     
 });
 
-const greyIcon = L.icon({
-    iconUrl: './icons/grey.svg', 
-    iconAnchor: [5, 5],
+const lightblueIcon = L.icon({
+    iconUrl: './icons/lightblue.svg', 
+    iconAnchor: [7.5, 8.5],
     iconSize: [15, 15],
     
 });
@@ -159,15 +159,15 @@ $.getJSON( "/getfromdb", function( data ) {
                 // return L.circleMarker(latlng, {radius:10})
                 if (feature.properties.angle) {
                     if (feature.properties.year < 1914) {
-                        return L.marker(latlng, { icon:yellowArrowIcon, opacity: 0.8, rotationAngle: feature.properties.angle })
+                        return L.marker(latlng, { icon:darkblueArrowIcon, opacity: 0.8, rotationAngle: feature.properties.angle })
                     }
                         
                     if (feature.properties.year >= 1914 & feature.properties.year <= 1945) {
-                        return L.marker(latlng, { icon:orangeArrowIcon, opacity: 0.8, rotationAngle: feature.properties.angle })
+                        return L.marker(latlng, { icon:middleblueArrowIcon, opacity: 0.8, rotationAngle: feature.properties.angle })
                     }
                         
                     if (feature.properties.year > 1945) {
-                        return L.marker(latlng, { icon:redArrowIcon, opacity: 0.8, rotationAngle: feature.properties.angle })
+                        return L.marker(latlng, { icon:lightblueArrowIcon, opacity: 0.8, rotationAngle: feature.properties.angle })
                     }
                         
                     else {
@@ -178,15 +178,15 @@ $.getJSON( "/getfromdb", function( data ) {
                     
                 else {
                     if (feature.properties.year < 1914) {
-                        return L.marker(latlng, { icon:yellowIcon, opacity: 0.8 })
+                        return L.marker(latlng, { icon:darkblueIcon, opacity: 0.8 })
                     }
                         
                     if (feature.properties.year >= 1914 & feature.properties.year <= 1945) {
-                        return L.marker(latlng, { icon:orangeIcon, opacity: 0.8 })
+                        return L.marker(latlng, { icon:middleblueIcon, opacity: 0.8 })
                     }
                         
                     if (feature.properties.year > 1945) {
-                        return L.marker(latlng, { icon:redIcon, opacity: 0.8 })
+                        return L.marker(latlng, { icon:lightblueIcon, opacity: 0.8 })
                     }
                         
                     else {

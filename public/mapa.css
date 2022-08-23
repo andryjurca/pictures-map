@@ -9,6 +9,8 @@ body {
   object-fit: contain;
   max-height: 100%;
   max-width: 100%;
+  margin:auto;
+  min-height: 100%;
 }
 
 #xicon {
@@ -43,6 +45,7 @@ body {
   width: 50%;
   height: 100vh;
   display: none; /* trebuie schimbat cu flex*/
+  
   
   
 }

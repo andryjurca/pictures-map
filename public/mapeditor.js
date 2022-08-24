@@ -21,13 +21,11 @@ function download(data, filename, type) {
 // create map and add tilelayer
 
 const map2 = L.map('map2').setView([44.429, 26.105], 13);
-        L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-        }).addTo(map2);
+
 L.tileLayer('https://tiles01.rent-a-planet.com/arhet2-carto/{z}/{x}/{y}.png?{foo}', {
-        foo: 'bar', 
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        }).addTo(map2);
+    foo: 'bar', 
+    attribution: 'Tiles and data created by <a href="https://geofictician.net/about.html">Geofictician</a> and contributors | coded by Andrei Jurcă'
+}).addTo(map2);
 
 // initialize drawnitems and add drawcontrol
 

@@ -45,9 +45,22 @@ body {
   width: 50%;
   height: 100vh;
   display: none; /* trebuie schimbat cu flex*/
-  
-  
-  
+}
+
+#imageDescription1 {
+  position: absolute;
+  padding: 5px;
+  margin: 5px;
+  left: 0px;
+  bottom:0px;
+}
+
+#imageDescription2 {
+  position: absolute;
+  padding: 5px;
+  margin: 5px;
+  right: 0px;
+  bottom: 0px;
 }
 
 #mapeditor-link {

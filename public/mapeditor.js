@@ -54,38 +54,49 @@ $.getJSON( "/getfromdb", function( data ) {
                 layer.addTo(drawnItems);
                 div = L.DomUtil.create('div', 'mydiv')
 
-                input = L.DomUtil.create('input', 'myinput', div)
-                input.type = 'text'
-                input.placeholder = 'filename'
+                filenameInput = L.DomUtil.create('input', 'myinput', div)
+                filenameInput.type = 'text'
+                filenameInput.placeholder = 'filename'
                 //if (UrlExists(feature.properties.filename)) 
-                input.value = feature.properties.filename || ''                 
+                filenameInput.value = feature.properties.filename || ''                 
                 //layer.bindPopup(div)
                 const inputHandler = function(o) {
                     layer.feature.properties.filename = o.target.value
                 }
-                input.addEventListener('input', inputHandler)
+                filenameInput.addEventListener('input', inputHandler)
 
-                input2 = L.DomUtil.create('input', 'myinput2', div)
-                input2.type = 'text'
-                input2.placeholder = 'angle'
+                angleInput = L.DomUtil.create('input', 'myinput2', div)
+                angleInput.type = 'text'
+                angleInput.placeholder = 'angle'
                 //if (UrlExists(feature.properties.filename)) 
-                input2.value = feature.properties.angle || ''                
+                angleInput.value = feature.properties.angle || ''                
                 //layer.bindPopup(div)
                 const inputHandler2 = function(o) {
                     layer.feature.properties.angle = o.target.value
                 }
-                input2.addEventListener('input', inputHandler2)
+                angleInput.addEventListener('input', inputHandler2)
 
-                input3 = L.DomUtil.create('input', 'myinput3', div)
-                input3.type = 'text'
-                input3.placeholder = 'year'
+                yearInput = L.DomUtil.create('input', 'myinput3', div)
+                yearInput.type = 'text'
+                yearInput.placeholder = 'year'
                 //if (UrlExists(feature.properties.filename)) 
-                input3.value = feature.properties.year || ''                
+                yearInput.value = feature.properties.year || ''                
                 layer.bindPopup(div)
                 const inputHandler3 = function(o) {
                     layer.feature.properties.year = o.target.value
                 }
-                input3.addEventListener('input', inputHandler3)
+                yearInput.addEventListener('input', inputHandler3)
+
+                sourceInput = L.DomUtil.create('input', 'myinput4', div)
+                sourceInput.type = 'text'
+                sourceInput.placeholder = 'source'
+                //if (UrlExists(feature.properties.filename)) 
+                sourceInput.value = feature.properties.source || ''                
+                layer.bindPopup(div)
+                const inputHandler4 = function(o) {
+                    layer.feature.properties.source = o.target.value
+                }
+                sourceInput.addEventListener('input', inputHandler4)
             }
         }).addTo(map2)
     }
@@ -100,45 +111,57 @@ $.getJSON( "/getfromdb", function( data ) {
 map2.on('draw:created', function(e) {
     
     const div = L.DomUtil.create('div', 'mydiv')
-    const input = L.DomUtil.create('input', 'myinput', div)
-    input.type = 'text'
-    input.placeholder = 'filename'
+    const filenameInput = L.DomUtil.create('input', 'myinput', div)
+    filenameInput.type = 'text'
+    filenameInput.placeholder = 'filename'
 
-    const input2 = L.DomUtil.create('input', 'myinput2', div)
-    input2.type = 'text'
-    input2.placeholder = 'angle'
+    const angleInput = L.DomUtil.create('input', 'myinput2', div)
+    angleInput.type = 'text'
+    angleInput.placeholder = 'angle'
 
-    const input3 = L.DomUtil.create('input', 'myinput3', div)
-    input3.type = 'text'
-    input3.placeholder = 'year'
+    const yearInput = L.DomUtil.create('input', 'myinput3', div)
+    yearInput.type = 'text'
+    yearInput.placeholder = 'year'
+
+    const sourceInput = L.DomUtil.create('input', 'myinput4', div)
+    sourceInput.type = 'text'
+    sourceInput.placeholder = 'source'
     
     const layer = e.layer
     layer.bindPopup(div)
-    feature = layer.feature = layer.feature || {};
 
+    feature = layer.feature = layer.feature || {};
     feature.type = feature.type || "Feature";
     const props = feature.properties = feature.properties || {};
+
     const inputHandler = function(o) {
         props.filename = o.target.value
     }
-    input.addEventListener('input', inputHandler)
-    console.log(input.value)
+
+    filenameInput.addEventListener('input', inputHandler)
+    console.log(filenameInput.value)
 
     const inputHandler2 = function(o) {
         props.angle = o.target.value
     }
 
-    input2.addEventListener('input', inputHandler2)
-    console.log(input2.value)
+    angleInput.addEventListener('input', inputHandler2)
+    console.log(angleInput.value)
 
     const inputHandler3 = function(o) {
         props.year = o.target.value
     }
 
-    input3.addEventListener('input', inputHandler3)
-    console.log(input3.value)
+    yearInput.addEventListener('input', inputHandler3)
+    console.log(yearInput.value)
 
-    
+    const inputHandler4 = (o) => {
+        props.source = o.target.value
+    }
+
+    sourceInput.addEventListener('input', inputHandler4)
+    console.log(sourceInput.value)
+
 
     drawnItems.addLayer(layer);
 });

@@ -83,7 +83,7 @@ L.tileLayer('https://tiles01.rent-a-planet.com/arhet2-carto/{z}/{x}/{y}.png?{foo
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
 
-// displaying the geojson data (objects and properties) on the map from server
+// marker icons and styles
 
 const myStyle = {
         "color": "#ff7800",
@@ -91,15 +91,15 @@ const myStyle = {
         "fillOpacity": 0.90
     };
 
-const orangeArrowIcon = L.icon({
-    iconUrl: './icons/orangearrow.svg', 
+const greyArrowIcon = L.icon({
+    iconUrl: './icons/greyarrow.svg', 
     iconAnchor: [7.5, 8.5],
     iconSize: [15, 15],
     
 });
 
-const orangeIcon = L.icon({
-    iconUrl: './icons/orange.svg', 
+const greyIcon = L.icon({
+    iconUrl: './icons/grey.svg', 
     iconAnchor: [7.5, 8.5],
     iconSize: [15, 15],
     
@@ -147,8 +147,7 @@ const lightblueIcon = L.icon({
     
 });
 
-
-
+// displaying the geojson data (objects and properties) on the map from server
  
 $.getJSON( "/getfromdb", function( data ) {
     geojsondata1 = JSON.stringify(data)
@@ -229,6 +228,12 @@ $.getJSON( "/getfromdb", function( data ) {
                         src1 = `https://res.cloudinary.com/hzyfr8ajt/image/upload/map-pictures/${feature.properties.filename}`
                         //console.log(src1)
                         document.getElementById("poza1").src=src1
+
+                        imageDescription1 = document.getElementById('imageDescription1')
+                        imageDescription2 = document.getElementById('imageDescription2')
+                        imageDescription1.innerHTML = feature.properties.year || ''
+                        imageDescription2.innerHTML = feature.properties.source || ''
+
                     })      
                         
                 } 

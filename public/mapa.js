@@ -80,7 +80,7 @@ const map = L.map('map', {
 
 L.tileLayer('https://tiles01.rent-a-planet.com/arhet2-carto/{z}/{x}/{y}.png?{foo}', {
         foo: 'bar', 
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        attribution: 'Tiles and data created by <a href="https://geofictician.net/about.html">Geofictician</a> and contributors | coded by Andrei Jurcă'
 }).addTo(map);
 
 // marker icons and styles

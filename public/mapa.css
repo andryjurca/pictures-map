@@ -53,6 +53,7 @@ body {
   margin: 5px;
   left: 0px;
   bottom:0px;
+  color: white;
 }
 
 #imageDescription2 {
@@ -61,6 +62,7 @@ body {
   margin: 5px;
   right: 0px;
   bottom: 0px;
+  color: white;
 }
 
 #mapeditor-link {

@@ -18,9 +18,54 @@ function download(data, filename, type) {
     }
 }
 
+let times_clicked = 0
+const textarea = document.getElementById('textarea')
+const okbutton = document.getElementById('okbutton')
+const cancelbutton = document.getElementById('cancelbutton')
+const uploadinput = document.getElementById('upload')
+
+L.DomEvent.disableScrollPropagation(textarea)
+L.DomEvent.disableClickPropagation(textarea)
+
+
+function texteditOnOff() {
+    times_clicked += 1
+    if (times_clicked%2 == 0) {
+        textarea.style.display = 'none'
+        okbutton.style.display = 'none'
+        cancelbutton.style.display = 'none'
+        uploadinput.style.display = 'none'
+
+    }
+    else {
+        textarea.style.display = 'block'
+        okbutton.style.display = 'block'
+        cancelbutton.style.display = 'block'
+        uploadinput.style.display = 'block'
+    }
+
+}
+
+function saveTextedit() {
+    newdata1 = textarea.value
+    $.post('/posttodb', {text: newdata1})
+    window.location.reload();
+    
+}
+
+
+
 // create map and add tilelayer
 
-const map2 = L.map('map2').setView([44.429, 26.105], 13);
+const lat = 44.429
+const lng = 26.105
+const latlng = L.latLng(lat, lng);
+
+const map2 = L.map('map2', {
+    center: latlng,
+    zoom: 13,
+    doubleClickZoom: false,
+})
 
 L.tileLayer('https://tiles01.rent-a-planet.com/arhet2-carto/{z}/{x}/{y}.png?{foo}', {
     foo: 'bar', 
@@ -46,6 +91,8 @@ map2.addControl(drawControl);
 
 $.getJSON( "/getfromdb", function( data ) {
     geojsondata1 = JSON.stringify(data)
+    //console.log(geojsondata1)
+    textarea.value = geojsondata1
     try {
         var geeoojson = L.geoJSON(JSON.parse(geojsondata1), {
             onEachFeature: function (feature, layer) {
@@ -171,8 +218,7 @@ $(document).ready(function(){
         newdata = JSON.stringify(drawnItems.toGeoJSON());
         alert(newdata);
         $.post('/posttodb', {text: newdata})
-        
-
+        textarea.value = newdata
     })
 })
 
@@ -184,6 +230,16 @@ $(document).ready(function(){
         alert(newdata);
         $.post('/posttodb', {text: newdata})
         download(newdata, 'newdata.geojson', type=Text)
+        textarea.value = newdata
     })
 })
 
+// import geojson file and update textarea
+
+uploadinput.addEventListener('change', () => {
+    const fr = new FileReader()
+    fr.readAsText(uploadinput.files[0])
+    fr.onload = function() {
+        textarea.value = fr.result
+    }
+})

@@ -11,7 +11,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.4.2/leaflet.draw.css"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.4.2/leaflet.draw.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="mapa.js" defer></script>
     <script src="mapeditor.js" type="text/javascript" defer></script>
 
 </head>
@@ -19,6 +18,14 @@
     <div id="map2">
         <button id="button" title="Save to map"></button>
         <button id="download-button" title="Download geojson file"></button>
+        <button id="edit-button" title="Edit geojson" onclick="texteditOnOff()"></button>
+        <div id="textareadiv">
+            <textarea name="textarea" id="textarea" placeholder="geojson data" cols="30" rows="10"></textarea>
+            <button type="button" value="ok" id="okbutton" onclick="saveTextedit()">Save</button>
+            <button type="button" value="cancel" id="cancelbutton" onclick="texteditOnOff()">Cancel</button>
+            <input type="file" id="upload">
+        </div>
+        
         <div id="map-link"><a href="./index.html" target="_blank">back to map</a></div>
     </div>
 </body>

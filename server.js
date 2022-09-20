@@ -5,7 +5,7 @@ const multer = require('multer');
 const path = require('path');
 const { Client } = require('pg');
 const { url } = require('inspector');
-const cloudinary = require('cloudinary').v2
+//const cloudinary = require('cloudinary').v2
 
 // express app
 

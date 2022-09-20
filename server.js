@@ -130,49 +130,49 @@ app.post('/posttodb', async (req, res) => {
 
 // cloudinary store images in cloud
 
-const cloud_name = process.env.CLOUD_NAME 
-const api_key = process.env.API_KEY
-const api_secret = process.env.API_SECRET
+// const cloud_name = process.env.CLOUD_NAME 
+// const api_key = process.env.API_KEY
+// const api_secret = process.env.API_SECRET
 
-cloudinary.config({ 
-    cloud_name: cloud_name, 
-    api_key: api_key, 
-    api_secret: api_secret, 
-    secure: true,
-});
+// cloudinary.config({ 
+//     cloud_name: cloud_name, 
+//     api_key: api_key, 
+//     api_secret: api_secret, 
+//     secure: true,
+// });
 
-cloudinary.api.resources({type:"upload",prefix:"map-pictures/"}, function(error, result){
-    //console.log(error, result)
-    //console.log(typeof(result.resources.length))
-    urlList = []
-    result.resources.forEach(image => {
-        const url = JSON.stringify(image.secure_url)
-        const relativeUrl = url.split("/map-pictures/")[1].slice(0, -1)
-        //console.log(relativeUrl)
-        urlList.push(relativeUrl)
+// cloudinary.api.resources({type:"upload",prefix:"map-pictures/"}, function(error, result){
+//     //console.log(error, result)
+//     //console.log(typeof(result.resources.length))
+//     urlList = []
+//     result.resources.forEach(image => {
+//         const url = JSON.stringify(image.secure_url)
+//         const relativeUrl = url.split("/map-pictures/")[1].slice(0, -1)
+//         //console.log(relativeUrl)
+//         urlList.push(relativeUrl)
         
-    })
-})
+//     })
+// })
 
-app.get('/cloudimagelist', (req, res) => {
-    console.log(urlList)
-    console.log('am actualizat porc gras')
-    res.json(urlList)
-})
+// app.get('/cloudimagelist', (req, res) => {
+//     console.log(urlList)
+//     console.log('am actualizat porc gras')
+//     res.json(urlList)
+// })
 
-function add(path) {
-    cloudinary.uploader.upload(path, {upload_preset: "test-preset", use_filename: true, unique_filename: false, folder: 'map-pictures'}, (error, result)=>{
-        console.log(result, error || 'You succesfully uploaded the image to cloudinary!');
-        imageURL = result.secure_url
-        console.log(imageURL)
-        urlList.push(imageURL)
-        console.log(`the current url list: ${urlList}`)
-    }
-)}
+// function add(path) {
+//     cloudinary.uploader.upload(path, {upload_preset: "test-preset", use_filename: true, unique_filename: false, folder: 'map-pictures'}, (error, result)=>{
+//         console.log(result, error || 'You succesfully uploaded the image to cloudinary!');
+//         imageURL = result.secure_url
+//         console.log(imageURL)
+//         urlList.push(imageURL)
+//         console.log(`the current url list: ${urlList}`)
+//     }
+// )}
 
-function del(id) {
-    cloudinary.uploader.destroy(id, function(result) { console.log(result) });
-}
+// function del(id) {
+//     cloudinary.uploader.destroy(id, function(result) { console.log(result) });
+// }
 
 // add("./public/img/crimsonu.jpg")
 // del('cld-sample')

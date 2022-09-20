@@ -198,7 +198,9 @@ $.getJSON( "/getfromdb", function( data ) {
               },
             onEachFeature: function (feature, layer) {   
                 if (feature.properties && feature.properties.filename) {
-                    popupContent = `${'<img src=' + JSON.stringify(`https://res.cloudinary.com/hzyfr8ajt/image/upload/map-pictures/${feature.properties.filename} `) + 'width="100" height="auto" id="imageBox"></img>'}`
+                    // popupContent = `${'<img src=' + JSON.stringify(`https://res.cloudinary.com/hzyfr8ajt/image/upload/map-pictures/${feature.properties.filename} `) + 'width="100" height="auto" id="imageBox"></img>'}`
+                    popupContent = `${'<img src=' + JSON.stringify(`./img/${feature.properties.filename} `) + 'width="100" height="auto" id="imageBox"></img>'}`
+
                     layer.bindTooltip(popupContent, { direction: 'top' })
                     
                     layer.on('click', function(e) {
@@ -225,7 +227,9 @@ $.getJSON( "/getfromdb", function( data ) {
                         //document.getElementById('btn').style.visibility = 'visible'
                         // console.log(e)
                         // console.log(layer)
-                        src1 = `https://res.cloudinary.com/hzyfr8ajt/image/upload/map-pictures/${feature.properties.filename}`
+                        // src1 = `https://res.cloudinary.com/hzyfr8ajt/image/upload/map-pictures/${feature.properties.filename}`
+                        src1 = `./img/${feature.properties.filename}`
+
                         //console.log(src1)
                         document.getElementById("poza1").src=src1
 

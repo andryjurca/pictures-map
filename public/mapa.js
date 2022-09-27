@@ -80,7 +80,8 @@ const map = L.map('map', {
 
 L.tileLayer('https://tiles01.rent-a-planet.com/arhet2-carto/{z}/{x}/{y}.png?{foo}', {
         foo: 'bar', 
-        attribution: 'Tiles and data created by <a href="https://geofictician.net/about.html">Geofictician</a> and contributors | coded by Andrei Jurcă'
+        attribution: 'Tiles and data created by <a href="https://geofictician.net/about.html">Geofictician</a> and contributors | coded by Andrei Jurcă',
+        maxZoom: 19
 }).addTo(map);
 
 // marker icons and styles

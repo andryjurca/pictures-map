@@ -76,13 +76,23 @@ const map = L.map('map', {
   minZoom: 13,
 })
 
-// add tilelayer
+// add tilelayers
 
-L.tileLayer('https://tiles01.rent-a-planet.com/arhet2-carto/{z}/{x}/{y}.png?{foo}', {
+const geofictionLayer = L.tileLayer('https://tiles01.rent-a-planet.com/arhet2-carto/{z}/{x}/{y}.png?{foo}', {
         foo: 'bar', 
         attribution: 'Tiles and data created by <a href="https://geofictician.net/about.html" target="_blank">Geofictician</a> and contributors | coded by <a href="https://github.com/andryjurca/pictures-map" target="_blank">Andrei Jurcă</a>',
         maxZoom: 19
 }).addTo(map);
+
+const osmLayer = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: 'coded by <a href="https://github.com/andryjurca/pictures-map" target="_blank">Andrei Jurcă</a>',
+        maxZoom: 19
+})
+
+const baseMaps = {
+    "1927": geofictionLayer,
+    "now": osmLayer
+}
 
 // marker icons and styles
 
@@ -159,38 +169,54 @@ $.getJSON( "/getfromdb", function( data ) {
                 // return L.circleMarker(latlng, {radius:10})
                 if (feature.properties.angle) {
                     if (feature.properties.year < 1914) {
-                        return L.marker(latlng, { icon:darkblueArrowIcon, opacity: 0.8, rotationAngle: feature.properties.angle })
+                        marker = L.marker(latlng, { icon:darkblueArrowIcon, opacity: 0.8, rotationAngle: feature.properties.angle })
+                        all_markers.push(marker)
+                        return marker
                     }
                         
                     if (feature.properties.year >= 1914 & feature.properties.year <= 1945) {
-                        return L.marker(latlng, { icon:middleblueArrowIcon, opacity: 0.8, rotationAngle: feature.properties.angle })
+                        marker = L.marker(latlng, { icon:middleblueArrowIcon, opacity: 0.8, rotationAngle: feature.properties.angle })
+                        all_markers.push(marker)
+                        return marker
                     }
                         
                     if (feature.properties.year > 1945) {
-                        return L.marker(latlng, { icon:lightblueArrowIcon, opacity: 0.8, rotationAngle: feature.properties.angle })
+                        marker = L.marker(latlng, { icon:lightblueArrowIcon, opacity: 0.8, rotationAngle: feature.properties.angle })
+                        all_markers.push(marker)
+                        return marker
                     }
                         
                     else {
-                        return L.marker(latlng, { icon:greyArrowIcon, opacity: 0.8, rotationAngle: feature.properties.angle })
+                        marker = L.marker(latlng, { icon:greyArrowIcon, opacity: 0.8, rotationAngle: feature.properties.angle })
+                        all_markers.push(marker)
+                        return marker
                     } 
                         
                 } 
                     
                 else {
                     if (feature.properties.year < 1914) {
-                        return L.marker(latlng, { icon:darkblueIcon, opacity: 0.8 })
+                        marker = L.marker(latlng, { icon:darkblueIcon, opacity: 0.8 })
+                        all_markers.push(marker)
+                        return marker
                     }
                         
                     if (feature.properties.year >= 1914 & feature.properties.year <= 1945) {
-                        return L.marker(latlng, { icon:middleblueIcon, opacity: 0.8 })
+                        marker = L.marker(latlng, { icon:middleblueIcon, opacity: 0.8 })
+                        all_markers.push(marker)
+                        return marker
                     }
                         
                     if (feature.properties.year > 1945) {
-                        return L.marker(latlng, { icon:lightblueIcon, opacity: 0.8 })
+                        marker = L.marker(latlng, { icon:lightblueIcon, opacity: 0.8 })
+                        all_markers.push(marker)
+                        return marker
                     }
                         
                     else {
-                        return L.marker(latlng, { icon:greyIcon, opacity:0.8 })
+                        marker = L.marker(latlng, { icon:greyIcon, opacity:0.8 })
+                        all_markers.push(marker)
+                        return marker
                     }
                 }
                     
@@ -252,6 +278,12 @@ $.getJSON( "/getfromdb", function( data ) {
     //     console.log(e)
     // }
 });
+
+const markerlayergroup = L.layerGroup(all_markers).addTo(map)
+overlayMaps = {
+    "photos": markerlayergroup
+}
+L.control.layers(baseMaps, overlayMaps, { collapsed: false }).addTo(map);
 
 // map.on('zoomend', function() {
 //     const currentZoom = map.getZoom(); 
